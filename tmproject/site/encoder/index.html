@@ -1,0 +1,2340 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../filters/">
+      
+      
+        <link rel="next" href="../decoder/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.18">
+    
+    
+      
+        <title>encoder - Documentació del Còdec de Vídeo</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.66ac8b77.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#documentacio-de-encoderpy" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Documentació del Còdec de Vídeo" class="md-header__button md-logo" aria-label="Documentació del Còdec de Vídeo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentació del Còdec de Vídeo
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              encoder
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Documentació del Còdec de Vídeo" class="md-nav__button md-logo" aria-label="Documentació del Còdec de Vídeo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Documentació del Còdec de Vídeo
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    cli
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../input/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    input
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../output/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    output
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reproduce/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    reproduce
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../filters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    filters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    encoder
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    encoder
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#funcions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funcions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      encoder
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.calculate_average_value" class="md-nav__link">
+    <span class="md-ellipsis">
+      calculate_average_value
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.calculate_correlation" class="md-nav__link">
+    <span class="md-ellipsis">
+      calculate_correlation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.calculate_psnr" class="md-nav__link">
+    <span class="md-ellipsis">
+      calculate_psnr
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.main" class="md-nav__link">
+    <span class="md-ellipsis">
+      main
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.mark_tile_for_removal" class="md-nav__link">
+    <span class="md-ellipsis">
+      mark_tile_for_removal
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.process_image_group" class="md-nav__link">
+    <span class="md-ellipsis">
+      process_image_group
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.reconstruct_image_from_tiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      reconstruct_image_from_tiles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.replace_tile_with_average" class="md-nav__link">
+    <span class="md-ellipsis">
+      replace_tile_with_average
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.split_images_into_groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      split_images_into_groups
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.subdivide_image_into_tiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      subdivide_image_into_tiles
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../decoder/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    decoder
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#funcions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funcions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      encoder
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.calculate_average_value" class="md-nav__link">
+    <span class="md-ellipsis">
+      calculate_average_value
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.calculate_correlation" class="md-nav__link">
+    <span class="md-ellipsis">
+      calculate_correlation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.calculate_psnr" class="md-nav__link">
+    <span class="md-ellipsis">
+      calculate_psnr
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.main" class="md-nav__link">
+    <span class="md-ellipsis">
+      main
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.mark_tile_for_removal" class="md-nav__link">
+    <span class="md-ellipsis">
+      mark_tile_for_removal
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.process_image_group" class="md-nav__link">
+    <span class="md-ellipsis">
+      process_image_group
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.reconstruct_image_from_tiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      reconstruct_image_from_tiles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.replace_tile_with_average" class="md-nav__link">
+    <span class="md-ellipsis">
+      replace_tile_with_average
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.split_images_into_groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      split_images_into_groups
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoder.subdivide_image_into_tiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      subdivide_image_into_tiles
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="documentacio-de-encoderpy">Documentació de encoder.py</h1>
+<h2 id="funcions">Funcions</h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="encoder"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="encoder.calculate_average_value" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">calculate_average_value</span><span class="p">(</span><span class="n">image</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Calcula el valor mitjà d'una imatge en escala de grisos o color.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>image</code></td>
+          <td>
+                <code><span title="numpy.ndarray">ndarray</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Una imatge com un array de numpy.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>float</code></td>          <td>
+                <code>float</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>El valor mitjà de la imatge.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>encoder.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">calculate_average_value</span><span class="p">(</span><span class="n">image</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calcula el valor mitjà d&#39;una imatge en escala de grisos o color.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (ndarray): Una imatge com un array de numpy.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: El valor mitjà de la imatge.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Convertir la imagen a un array de numpy</span>
+    <span class="n">img_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+    <span class="c1"># Si la imagen es en color (tres canales)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">img_array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="c1"># Calcular el valor medio para cada canal y luego el promedio de esos valores</span>
+        <span class="n">mean_value</span> <span class="o">=</span> <span class="n">img_array</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">mean_value</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Calcular el valor medio directamente para una imagen en escala de grises</span>
+        <span class="n">mean_value</span> <span class="o">=</span> <span class="n">img_array</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">mean_value</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="encoder.calculate_correlation" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">calculate_correlation</span><span class="p">(</span><span class="n">current_tile</span><span class="p">,</span> <span class="n">reference_tile</span><span class="p">,</span> <span class="n">seekrange</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Calcula la correlació entre dues teselles d'imatges consecutives amb un desplaçament màxim especificat. Algoritme de correspondencia de tesela.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>current_tile</code></td>
+          <td>
+                <code><span title="numpy.ndarray">ndarray</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Tesela de la imatge actual.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>reference_tile</code></td>
+          <td>
+                <code><span title="numpy.ndarray">ndarray</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Tesela de la imatge de referència.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>seekrange</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Desplaçament màxim en la cerca de teselles coincidents.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>float</code></td>          <td>
+                <code>tuple</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Valor de correlació màxima entre les dues teselles considerant el desplaçament.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+<td><code>tuple</code></td>          <td>
+                <code>tuple</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Posició de desplaçament de la tesela actual (dx, dy).</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>encoder.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">calculate_correlation</span><span class="p">(</span><span class="n">current_tile</span><span class="p">,</span> <span class="n">reference_tile</span><span class="p">,</span> <span class="n">seekrange</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calcula la correlació entre dues teselles d&#39;imatges consecutives amb un desplaçament màxim especificat. Algoritme de correspondencia de tesela.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        current_tile (ndarray): Tesela de la imatge actual.</span>
+<span class="sd">        reference_tile (ndarray): Tesela de la imatge de referència.</span>
+<span class="sd">        seekrange (int): Desplaçament màxim en la cerca de teselles coincidents.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Valor de correlació màxima entre les dues teselles considerant el desplaçament.</span>
+<span class="sd">        tuple: Posició de desplaçament de la tesela actual (dx, dy).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Convertir las teselas a tipo de dato flotante</span>
+    <span class="n">current_tile</span> <span class="o">=</span> <span class="n">current_tile</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">reference_tile</span> <span class="o">=</span> <span class="n">reference_tile</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="n">max_correlation</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># Inicializar con un valor mínimo de correlación</span>
+    <span class="n">max_dx</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Inicializar el desplazamiento horizontal máximo</span>
+    <span class="n">max_dy</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Inicializar el desplazamiento vertical máximo</span>
+
+    <span class="c1"># Recorrer todos los desplazamientos posibles dentro del rango especificado</span>
+    <span class="k">for</span> <span class="n">dy</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="n">seekrange</span><span class="p">,</span> <span class="n">seekrange</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">dx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="n">seekrange</span><span class="p">,</span> <span class="n">seekrange</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="c1"># Desplazar la tesela actual</span>
+            <span class="n">shifted_current_tile</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">current_tile</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="p">(</span><span class="n">dy</span><span class="p">,</span> <span class="n">dx</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+            <span class="c1"># Calcular la media de cada tesela</span>
+            <span class="n">mean_current</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shifted_current_tile</span><span class="p">)</span>
+            <span class="n">mean_reference</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">reference_tile</span><span class="p">)</span>
+
+            <span class="c1"># Calcular las diferencias respecto a la media para cada tesela</span>
+            <span class="n">diff_current</span> <span class="o">=</span> <span class="n">shifted_current_tile</span> <span class="o">-</span> <span class="n">mean_current</span>
+            <span class="n">diff_reference</span> <span class="o">=</span> <span class="n">reference_tile</span> <span class="o">-</span> <span class="n">mean_reference</span>
+
+            <span class="c1"># Calcular la correlación entre las dos teselas</span>
+            <span class="n">numerator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">diff_current</span> <span class="o">*</span> <span class="n">diff_reference</span><span class="p">)</span>
+            <span class="n">denominator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">diff_current</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">diff_reference</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">denominator</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">denominator</span><span class="p">):</span>
+                <span class="n">correlation</span> <span class="o">=</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span>
+                <span class="k">if</span> <span class="n">correlation</span> <span class="o">&gt;</span> <span class="n">max_correlation</span><span class="p">:</span>
+                    <span class="n">max_correlation</span> <span class="o">=</span> <span class="n">correlation</span>
+                    <span class="n">max_dx</span> <span class="o">=</span> <span class="n">dx</span>
+                    <span class="n">max_dy</span> <span class="o">=</span> <span class="n">dy</span>      
+
+    <span class="k">return</span> <span class="n">max_correlation</span><span class="p">,</span> <span class="p">(</span><span class="n">max_dx</span><span class="p">,</span> <span class="n">max_dy</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="encoder.calculate_psnr" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">calculate_psnr</span><span class="p">(</span><span class="n">original_images</span><span class="p">,</span> <span class="n">compressed_images</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Calcula el PSNR (Peak Signal-to-Noise Ratio) entre imatges originals i comprimides.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>original_images</code></td>
+          <td>
+                <code>dict</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Diccionari d'imatges originals.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>compressed_images</code></td>
+          <td>
+                <code>dict</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Diccionari d'imatges comprimides.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>float</code></td>          <td>
+                <code>float</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>El valor mitjà de PSNR entre totes les imatges, o None si no es va poder calcular.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>encoder.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">calculate_psnr</span><span class="p">(</span><span class="n">original_images</span><span class="p">,</span> <span class="n">compressed_images</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calcula el PSNR (Peak Signal-to-Noise Ratio) entre imatges originals i comprimides.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        original_images (dict): Diccionari d&#39;imatges originals.</span>
+<span class="sd">        compressed_images (dict): Diccionari d&#39;imatges comprimides.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: El valor mitjà de PSNR entre totes les imatges, o None si no es va poder calcular.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">psnr_values</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">title</span><span class="p">,</span> <span class="n">original_image</span> <span class="ow">in</span> <span class="n">original_images</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">compressed_image</span> <span class="o">=</span> <span class="n">compressed_images</span><span class="p">[</span><span class="n">title</span><span class="p">]</span>
+
+        <span class="c1"># Verificar si las imágenes tienen el mismo tamaño</span>
+        <span class="k">if</span> <span class="n">original_image</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">compressed_image</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Les dimensions de les imatges </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2"> són diferents.&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Calcular PSNR</span>
+        <span class="n">mse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">original_image</span> <span class="o">-</span> <span class="n">compressed_image</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mse</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">psnr</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">((</span><span class="mi">255</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">mse</span><span class="p">)</span>
+            <span class="n">psnr_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">psnr</span><span class="p">)</span>
+
+    <span class="c1"># Calcular PSNR promedio</span>
+    <span class="k">if</span> <span class="n">psnr_values</span><span class="p">:</span>
+        <span class="n">avg_psnr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">psnr_values</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">avg_psnr</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="encoder.main" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">main</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">ntiles</span><span class="p">,</span> <span class="n">seekrange</span><span class="p">,</span> <span class="n">gop</span><span class="p">,</span> <span class="n">quality</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Processa les imatges per a la codificació, dividint-les en grups segons el GOP (Group of Pictures) 
+i aplicant els paràmetres especificats per a la codificació.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>images</code></td>
+          <td>
+                <code>dict</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Diccionari amb les imatges.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>ntiles</code></td>
+          <td>
+                <code>tuple</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Nombre de teselles en els eixos vertical i horitzontal.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>seekrange</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Desplaçament màxim en la cerca de teselles coincidents.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>gop</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Mida del GOP.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>quality</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Factor de qualitat per determinar la coincidència de teselles.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>metadata</code></td>
+          <td>
+                <code>dict</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Diccionari per emmagatzemar la informació dels fotogrames i els paràmetres de codificació.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>encoder.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">ntiles</span><span class="p">,</span> <span class="n">seekrange</span><span class="p">,</span> <span class="n">gop</span><span class="p">,</span> <span class="n">quality</span><span class="p">,</span> <span class="n">metadata</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Processa les imatges per a la codificació, dividint-les en grups segons el GOP (Group of Pictures) </span>
+<span class="sd">    i aplicant els paràmetres especificats per a la codificació.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        images (dict): Diccionari amb les imatges.</span>
+<span class="sd">        ntiles (tuple): Nombre de teselles en els eixos vertical i horitzontal.</span>
+<span class="sd">        seekrange (int): Desplaçament màxim en la cerca de teselles coincidents.</span>
+<span class="sd">        gop (int): Mida del GOP.</span>
+<span class="sd">        quality (float): Factor de qualitat per determinar la coincidència de teselles.</span>
+<span class="sd">        metadata (dict): Diccionari per emmagatzemar la informació dels fotogrames i els paràmetres de codificació.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Dividir las imágenes en grupos según el GOP</span>
+    <span class="n">image_groups</span> <span class="o">=</span> <span class="n">split_images_into_groups</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">gop</span><span class="p">)</span>
+    <span class="n">num_processors</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
+    <span class="n">thread_limit</span> <span class="o">=</span> <span class="n">num_processors</span>
+    <span class="c1">#thread_limit = num_processors // 2</span>
+
+    <span class="k">with</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">image_groups</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Processant grups d&#39;imatges&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">pbar</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="n">thread_limit</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+            <span class="n">futures</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">image_group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">image_groups</span><span class="p">):</span>
+                <span class="n">future</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">process_image_group</span><span class="p">,</span> <span class="n">image_group</span><span class="p">,</span> <span class="n">ntiles</span><span class="p">,</span> <span class="n">seekrange</span><span class="p">,</span> <span class="n">quality</span><span class="p">,</span> <span class="n">images</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+                <span class="n">futures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">as_completed</span><span class="p">(</span><span class="n">futures</span><span class="p">):</span>
+                <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+                <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">pbar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="c1"># Ordenar los metadatos por nombre de archivo</span>
+    <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;frames&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;file_name&quot;</span><span class="p">])</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="encoder.mark_tile_for_removal" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">mark_tile_for_removal</span><span class="p">(</span><span class="n">tiles_to_remove</span><span class="p">,</span> <span class="n">tile_index</span><span class="p">,</span> <span class="n">current_tile</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Marca una tesela per ser eliminada emmagatzemant el seu índex en un diccionari.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>tiles_to_remove</code></td>
+          <td>
+                <code>dict</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Diccionari que emmagatzema els índexs de les teselles a eliminar, indexats per la seva posició.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>tile_index</code></td>
+          <td>
+                <code>tuple</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>L'índex de la tesela dins de la seva imatge.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>current_tile</code></td>
+          <td>
+                <code><span title="numpy.ndarray">ndarray</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>La tesela actual.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>encoder.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">mark_tile_for_removal</span><span class="p">(</span><span class="n">tiles_to_remove</span><span class="p">,</span> <span class="n">tile_index</span><span class="p">,</span> <span class="n">current_tile</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Marca una tesela per ser eliminada emmagatzemant el seu índex en un diccionari.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tiles_to_remove (dict): Diccionari que emmagatzema els índexs de les teselles a eliminar, indexats per la seva posició.</span>
+<span class="sd">        tile_index (tuple): L&#39;índex de la tesela dins de la seva imatge.</span>
+<span class="sd">        current_tile (ndarray): La tesela actual.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">tile_index</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tiles_to_remove</span><span class="p">:</span>
+        <span class="n">tiles_to_remove</span><span class="p">[</span><span class="n">tile_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_tile</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="encoder.process_image_group" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">process_image_group</span><span class="p">(</span><span class="n">image_group</span><span class="p">,</span> <span class="n">ntiles</span><span class="p">,</span> <span class="n">seekrange</span><span class="p">,</span> <span class="n">quality</span><span class="p">,</span> <span class="n">images</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">group_index</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Processa un grup d'imatges, dividint-les en teselles i aplicant l'algorisme de correlació per a la codificació.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>image_group</code></td>
+          <td>
+                <code>dict</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Grup d'imatges a processar.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>ntiles</code></td>
+          <td>
+                <code>tuple</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Nombre de teselles en els eixos vertical i horitzontal.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>seekrange</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Desplaçament màxim en la cerca de teselles coincidents.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>quality</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Factor de qualitat per determinar la coincidència de teselles.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>images</code></td>
+          <td>
+                <code>dict</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Diccionari amb les imatges.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>metadata</code></td>
+          <td>
+                <code>dict</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Diccionari per emmagatzemar la informació dels fotogrames i els paràmetres de codificació.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>group_index</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Índex del grup d'imatges.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>encoder.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">process_image_group</span><span class="p">(</span><span class="n">image_group</span><span class="p">,</span> <span class="n">ntiles</span><span class="p">,</span> <span class="n">seekrange</span><span class="p">,</span> <span class="n">quality</span><span class="p">,</span> <span class="n">images</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">group_index</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Processa un grup d&#39;imatges, dividint-les en teselles i aplicant l&#39;algorisme de correlació per a la codificació.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image_group (dict): Grup d&#39;imatges a processar.</span>
+<span class="sd">        ntiles (tuple): Nombre de teselles en els eixos vertical i horitzontal.</span>
+<span class="sd">        seekrange (int): Desplaçament màxim en la cerca de teselles coincidents.</span>
+<span class="sd">        quality (float): Factor de qualitat per determinar la coincidència de teselles.</span>
+<span class="sd">        images (dict): Diccionari amb les imatges.</span>
+<span class="sd">        metadata (dict): Diccionari per emmagatzemar la informació dels fotogrames i els paràmetres de codificació.</span>
+<span class="sd">        group_index (int): Índex del grup d&#39;imatges.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">reference_image</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">tiles_to_remove</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">image_group</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">desc</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Processant grup </span><span class="si">{</span><span class="n">group_index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">leave</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">tile_height</span> <span class="o">=</span> <span class="n">height</span> <span class="o">//</span> <span class="n">ntiles</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">tile_width</span> <span class="o">=</span> <span class="n">width</span> <span class="o">//</span> <span class="n">ntiles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">tiles</span> <span class="o">=</span> <span class="n">subdivide_image_into_tiles</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">tile_height</span><span class="p">,</span> <span class="n">tile_width</span><span class="p">,</span> <span class="n">ntiles</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">reference_image</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">frame_info</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="n">file_name</span><span class="p">,</span>
+                <span class="s2">&quot;reference_frame&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="s2">&quot;tiles&quot;</span><span class="p">:</span> <span class="p">[]</span>
+            <span class="p">}</span>
+
+            <span class="k">for</span> <span class="n">tile_index</span><span class="p">,</span> <span class="n">current_tile</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">tiles</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">desc</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Processant tessel·les del grup </span><span class="si">{</span><span class="n">group_index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">leave</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">previous_index</span><span class="p">,</span> <span class="n">previous_tile</span> <span class="ow">in</span> <span class="n">reference_tiles</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="c1"># Aplicar el algoritmo de correlación</span>
+                    <span class="n">correlation_score</span><span class="p">,</span> <span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">)</span> <span class="o">=</span> <span class="n">calculate_correlation</span><span class="p">(</span><span class="n">current_tile</span><span class="p">,</span> <span class="n">previous_tile</span><span class="p">,</span> <span class="n">seekrange</span><span class="p">)</span>
+                    <span class="c1"># Comparar el resultado con el umbral de calidad</span>
+                    <span class="k">if</span> <span class="n">correlation_score</span> <span class="o">&gt;=</span> <span class="n">quality</span><span class="p">:</span>
+                        <span class="c1"># Marcar la tesela para ser eliminada</span>
+                        <span class="n">mark_tile_for_removal</span><span class="p">(</span><span class="n">tiles_to_remove</span><span class="p">,</span> <span class="n">tile_index</span><span class="p">,</span> <span class="n">current_tile</span><span class="p">)</span>
+                        <span class="c1"># Guardar la información de la tesela en el diccionario de metadatos</span>
+                        <span class="n">x</span> <span class="o">=</span> <span class="n">tile_index</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">tile_width</span> <span class="o">+</span> <span class="n">dx</span>
+                        <span class="n">y</span> <span class="o">=</span> <span class="n">tile_index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">tile_height</span> <span class="o">+</span> <span class="n">dy</span>
+                        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+                        <span class="k">if</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+                        <span class="n">frame_info</span><span class="p">[</span><span class="s2">&quot;tiles&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;tb_id&quot;</span><span class="p">:</span> <span class="n">previous_index</span><span class="p">,</span> <span class="s2">&quot;td_position&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)})</span>
+
+            <span class="k">if</span> <span class="n">tiles_to_remove</span><span class="p">:</span>
+                <span class="c1"># Calcular el valor medio de la imagen</span>
+                <span class="n">average_value</span> <span class="o">=</span> <span class="n">calculate_average_value</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+                <span class="c1"># Procesar las teselas marcadas para eliminación</span>
+                <span class="n">tmp_tiles</span> <span class="o">=</span> <span class="n">tiles</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">replace_tile_with_average</span><span class="p">(</span><span class="n">tmp_tiles</span><span class="p">,</span> <span class="n">tiles_to_remove</span><span class="p">,</span> <span class="n">average_value</span><span class="p">)</span>
+                <span class="n">tiles_to_remove</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+                <span class="c1"># Reconstruir la imagen desde las teselas modificadas</span>
+                <span class="n">reconstructed_image</span> <span class="o">=</span> <span class="n">reconstruct_image_from_tiles</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">tmp_tiles</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="n">ntiles</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">tile_height</span><span class="p">,</span> <span class="n">tile_width</span><span class="p">)</span>
+                <span class="c1"># Actualizar la imagen original en el diccionario con la imagen reconstruida</span>
+                <span class="n">images</span><span class="p">[</span><span class="n">file_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">reconstructed_image</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">reference_image</span> <span class="o">=</span> <span class="n">image</span>
+            <span class="n">reference_tiles</span> <span class="o">=</span> <span class="n">tiles</span>
+            <span class="n">frame_info</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="n">file_name</span><span class="p">,</span>
+                <span class="s2">&quot;reference_frame&quot;</span><span class="p">:</span> <span class="kc">True</span>
+            <span class="p">}</span>
+
+        <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;frames&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frame_info</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="encoder.reconstruct_image_from_tiles" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">reconstruct_image_from_tiles</span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">n_tiles</span><span class="p">,</span> <span class="n">original_shape</span><span class="p">,</span> <span class="n">tile_height</span><span class="p">,</span> <span class="n">tile_width</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Reconstrueix la imatge original a partir de les teselles.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>tiles</code></td>
+          <td>
+                <code>dict</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Diccionari de teselles.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>n_tiles</code></td>
+          <td>
+                <code>tuple</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Nombre de teselles en els eixos vertical i horitzontal (n_tiles_y, n_tiles_x).</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>original_shape</code></td>
+          <td>
+                <code>tuple</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>La forma original de la imatge (altura, amplada, canals).</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>tile_height</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Alçada de cada tesela.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>tile_width</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Amplada de cada tesela.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>ndarray</code></td>          <td>
+                <code><span title="numpy.ndarray">ndarray</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>La imatge reconstruïda com una matriu de numpy.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>encoder.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">reconstruct_image_from_tiles</span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">n_tiles</span><span class="p">,</span> <span class="n">original_shape</span><span class="p">,</span> <span class="n">tile_height</span><span class="p">,</span> <span class="n">tile_width</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reconstrueix la imatge original a partir de les teselles.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tiles (dict): Diccionari de teselles.</span>
+<span class="sd">        n_tiles (tuple): Nombre de teselles en els eixos vertical i horitzontal (n_tiles_y, n_tiles_x).</span>
+<span class="sd">        original_shape (tuple): La forma original de la imatge (altura, amplada, canals).</span>
+<span class="sd">        tile_height (int): Alçada de cada tesela.</span>
+<span class="sd">        tile_width (int): Amplada de cada tesela.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ndarray: La imatge reconstruïda com una matriu de numpy.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">reconstructed_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">original_shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tiles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_tiles</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_tiles</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">reconstructed_image</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">tile_height</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">tile_height</span><span class="p">,</span> <span class="n">j</span><span class="o">*</span><span class="n">tile_width</span><span class="p">:(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">tile_width</span><span class="p">]</span> <span class="o">=</span> <span class="n">tiles</span><span class="p">[</span><span class="n">count</span><span class="p">]</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">reconstructed_image</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="encoder.replace_tile_with_average" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">replace_tile_with_average</span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">tiles_to_remove</span><span class="p">,</span> <span class="n">average_value</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Reemplaça les teselles marcades per eliminació pel seu valor mitjà.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>tiles</code></td>
+          <td>
+                <code>dict</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Diccionari de teselles.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>tiles_to_remove</code></td>
+          <td>
+                <code>dict</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Diccionari que emmagatzema els índexs de les teselles a eliminar.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>average_value</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>El valor mitjà que s'utilitzarà per reemplaçar les teselles marcades.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>encoder.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">replace_tile_with_average</span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">tiles_to_remove</span><span class="p">,</span> <span class="n">average_value</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reemplaça les teselles marcades per eliminació pel seu valor mitjà.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tiles (dict): Diccionari de teselles.</span>
+<span class="sd">        tiles_to_remove (dict): Diccionari que emmagatzema els índexs de les teselles a eliminar.</span>
+<span class="sd">        average_value (float): El valor mitjà que s&#39;utilitzarà per reemplaçar les teselles marcades.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">tile_index</span> <span class="ow">in</span> <span class="n">tiles_to_remove</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">tile_index</span> <span class="ow">in</span> <span class="n">tiles</span><span class="p">:</span>
+            <span class="n">tiles</span><span class="p">[</span><span class="n">tile_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">tiles</span><span class="p">[</span><span class="n">tile_index</span><span class="p">],</span> <span class="n">average_value</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="encoder.split_images_into_groups" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">split_images_into_groups</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">gop</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Divideix la llista d'imatges en conjunts consecutius segons el GOP (Grup de Fotogrames).</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>images</code></td>
+          <td>
+                <code>dict</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Diccionari d'imatges.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>gop</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Mida del GOP.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>list</code></td>          <td>
+                <code>list</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Llista de diccionaris, on cada diccionari conté imatges consecutives de mida gop.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>encoder.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">split_images_into_groups</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">gop</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Divideix la llista d&#39;imatges en conjunts consecutius segons el GOP (Grup de Fotogrames).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        images (dict): Diccionari d&#39;imatges.</span>
+<span class="sd">        gop (int): Mida del GOP.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: Llista de diccionaris, on cada diccionari conté imatges consecutives de mida gop.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">image_groups</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">),</span> <span class="n">gop</span><span class="p">):</span>
+        <span class="c1"># Obtener el conjunto de claves (índices) de las imágenes consecutivas de tamaño gop</span>
+        <span class="n">group_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">images</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">gop</span><span class="p">]</span>
+
+        <span class="c1"># Crear un diccionario para almacenar las imágenes en este grupo</span>
+        <span class="n">group_images</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">images</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">group_keys</span><span class="p">}</span>
+
+        <span class="c1"># Agregar este diccionario al grupo de imágenes</span>
+        <span class="n">image_groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">group_images</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">image_groups</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="encoder.subdivide_image_into_tiles" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">subdivide_image_into_tiles</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">tile_height</span><span class="p">,</span> <span class="n">tile_width</span><span class="p">,</span> <span class="n">n_tiles</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Subdivideix una imatge en el nombre especificat de teselles.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>image</code></td>
+          <td>
+                <code><span title="numpy.ndarray">ndarray</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Matriu de dades de la imatge.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>tile_height</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Alçada de cada tesela.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>tile_width</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Amplada de cada tesela.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>n_tiles</code></td>
+          <td>
+                <code>tuple</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Nombre de teselas en els eixos vertical i horitzontal.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>dict</code></td>          <td>
+                <code>dict</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Diccionari on les claus són els índexos de les teselles i els valors són les subimatges (teselles).</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>encoder.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">subdivide_image_into_tiles</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">tile_height</span><span class="p">,</span> <span class="n">tile_width</span><span class="p">,</span> <span class="n">n_tiles</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Subdivideix una imatge en el nombre especificat de teselles.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (ndarray): Matriu de dades de la imatge.</span>
+<span class="sd">        tile_height (int): Alçada de cada tesela.</span>
+<span class="sd">        tile_width (int): Amplada de cada tesela.</span>
+<span class="sd">        n_tiles (tuple): Nombre de teselas en els eixos vertical i horitzontal.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Diccionari on les claus són els índexos de les teselles i els valors són les subimatges (teselles).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tiles</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_tiles</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_tiles</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">tile</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">tile_height</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">tile_height</span><span class="p">,</span> <span class="n">j</span><span class="o">*</span><span class="n">tile_width</span><span class="p">:(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">tile_width</span><span class="p">]</span>
+            <span class="n">tiles</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="n">tile</span>
+    <span class="k">return</span> <span class="n">tiles</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.3220b9d7.min.js"></script>
+      
+    
+  </body>
+</html>

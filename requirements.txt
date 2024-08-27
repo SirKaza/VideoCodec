@@ -1,0 +1,13 @@
+scipy~=1.7
+click~=8.1
+pillow~=10.1
+imageio~=2.30
+opencv-python~=4.5
+pooch
+matplotlib
+numpy
+tqdm
+mkdocs~=1.5.3
+mkdocstrings~=0.24.3
+mkdocstrings-python~=1.9.2
+mkdocs-material~=9.5.17

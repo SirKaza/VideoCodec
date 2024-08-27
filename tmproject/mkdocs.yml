@@ -1,0 +1,18 @@
+site_name: Documentació del Còdec de Vídeo
+
+nav:
+  - Inicio: index.md
+  - cli: cli.md
+  - input: input.md
+  - output: output.md
+  - reproduce: reproduce.md
+  - filters: filters.md
+  - encoder: encoder.md
+  - decoder: decoder.md
+
+plugins:
+  - search
+  - mkdocstrings
+
+theme:
+  name: material
